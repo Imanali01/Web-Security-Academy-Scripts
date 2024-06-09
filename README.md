@@ -1,2 +1,2 @@
 # PortSwigger-Academy-Scripts
-Python Scripts for PortSwigger Academy Labs
+Python scripts I created to solve PortSwigger's Web Security Academy Labs
