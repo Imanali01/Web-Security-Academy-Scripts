@@ -30,7 +30,7 @@ def enumerate_password():
                 password = password + j
                 print(j, end='', flush=True)
                 break
-    print(f"The password is: {password}")
+    print(f"\nThe password is: {password}")
 
 if __name__=="__main__":
     try:
