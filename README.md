@@ -6,5 +6,6 @@ This repository contains Python scripts I developed to solve various labs from P
   <summary>SQL Injection</summary>
   
   - [Blind SQL injection with conditional responses](./SQL%20Injection%20Labs/Blind%20SQL%20Injection%20with%20Conditional%20Responses)
+  - [SQL injection attack, querying the database type and version on Oracle](./SQL%20Injection%20Labs/SQL%20injection%20attack,%20querying%20the%20database%20type%20and%20version%20on%20Oracle)
     
 </details>
