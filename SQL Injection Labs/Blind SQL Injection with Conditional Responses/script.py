@@ -44,6 +44,7 @@ def enumerate_password(url, password_length):
                 password = password + j
                 print(j, end='', flush=True)
                 break
+    print()
 
 def main():
     try:
