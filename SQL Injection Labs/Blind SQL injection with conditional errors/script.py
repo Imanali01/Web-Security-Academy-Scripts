@@ -29,7 +29,7 @@ def enumerate_password(url, length):
 def main():
     try:
         url = sys.argv[1]
-        print("Enumerating password length: ")
+        print("Enumerating password length... ")
         password_length = enumerate_password_length(url)
         print(f"Password length: {password_length}")
         enumerate_password(url, password_length)
