@@ -1,4 +1,4 @@
-# Port Swigger Academy Scripts
+# Web Security Academy Scripts
 This repository contains Python scripts I developed to solve various labs from PortSwigger's Web Security Academy. These scripts automate the process of identifying and exploiting web security vulnerabilities covered in the academy's labs. 
 
 ## Table of Contents
