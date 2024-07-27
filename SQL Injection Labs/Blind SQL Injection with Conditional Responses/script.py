@@ -44,7 +44,6 @@ def enumerate_password(url, password_length):
                 password = password + j
                 print(j, end='', flush=True)
                 break
-    print()
 
 def main():
     try:
@@ -53,6 +52,7 @@ def main():
         password_length = enumerate_password_length(url)
         print(f"Password Length: {password_length} characters ")
         enumerate_password(url, password_length)
+        print()
     except IndexError:
         print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://example.com")
 
