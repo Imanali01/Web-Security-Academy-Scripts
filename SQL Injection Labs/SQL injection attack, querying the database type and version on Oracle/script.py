@@ -33,5 +33,5 @@ if __name__=="__main__":
         print(get_db_version(num_of_columns))
 
     except IndexError:
-        print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://example.com")
+        print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
 
