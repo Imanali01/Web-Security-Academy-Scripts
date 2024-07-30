@@ -17,5 +17,6 @@ This repository contains Python scripts I developed to solve various labs from P
 
   - [Remote code execution via web shell upload](./File-Upload/Remote%20code%20execution%20via%20web%20shell%20upload)
   - [Web shell upload via Content-Type restriction bypass](./File-Upload%2FWeb%20shell%20upload%20via%20Content-Type%20restriction%20bypass)
+  - [Web shell upload via path traversal](./File-Upload/Web%20shell%20upload%20via%20path%20traversal)
 
 </details>
