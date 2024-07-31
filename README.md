@@ -7,9 +7,7 @@ This repository contains Python scripts I developed to solve various labs from P
 
   - [SQL injection attack, querying the database type and version on Oracle](./SQL%20Injection%20Labs/SQL%20injection%20attack,%20querying%20the%20database%20type%20and%20version%20on%20Oracle)
   - [Blind SQL injection with conditional responses](./SQL%20Injection%20Labs/Blind%20SQL%20Injection%20with%20Conditional%20Responses)
-  - [Blind SQL injection with conditional errors](./SQL%20Injection%20Labs/Blind%20SQL%20injection%20with%20conditional%20errors)
-
-    
+  - [Blind SQL injection with conditional errors](./SQL%20Injection%20Labs/Blind%20SQL%20injection%20with%20conditional%20errors)    
 </details>
 
 <details>
@@ -19,5 +17,11 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Web shell upload via Content-Type restriction bypass](./File-Upload%2FWeb%20shell%20upload%20via%20Content-Type%20restriction%20bypass)
   - [Web shell upload via path traversal](./File-Upload/Web%20shell%20upload%20via%20path%20traversal)
   - [Web shell upload via obfuscated file extension](./File-Upload/Web%20shell%20upload%20via%20obfuscated%20file%20extension)
+</details>
+
+<details>
+  <summary>XXE Injection</summary>
+
+  - [Exploiting XXE using external entities to retrieve files](./XXE%20Injection%2FExploiting%20XXE%20using%20external%20entities%20to%20retrieve%20files)
 
 </details>
