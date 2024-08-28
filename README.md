@@ -26,5 +26,6 @@ This repository contains Python scripts I developed to solve various labs from P
   <summary>XXE Injection</summary>
 
   - [Exploiting XXE using external entities to retrieve files](./XXE%20Injection%2FExploiting%20XXE%20using%20external%20entities%20to%20retrieve%20files)
+  - [Exploiting XXE to perform SSRF attacks](./XXE%20Injection%2FExploiting%20XXE%20to%20perform%20SSRF%20attacks)
 
 </details>
