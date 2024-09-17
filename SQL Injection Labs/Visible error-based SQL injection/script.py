@@ -1,6 +1,7 @@
 import sys
 import requests
 from bs4 import BeautifulSoup
+
 def main():
     try:
         url = sys.argv[1].rstrip('/')
