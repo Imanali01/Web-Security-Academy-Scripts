@@ -22,8 +22,8 @@ def get_db_version(lab_url, num_of_columns):
         response = requests.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
-            version_string = soup.find('tbody')
-            return version_string.get_text().strip()
+            version_string = soup.find('tbody').get_text().strip()
+            return version_string
 
 
 def main():
