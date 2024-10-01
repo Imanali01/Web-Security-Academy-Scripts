@@ -7,11 +7,11 @@ def time_based_sqli_check(url):
     response = requests.get(url, cookies={'TrackingId': encoded_payload})
 
     if response.status_code != 200:
-        print("Request Failed, please check your url and try again")
-    elif (response.elapsed.total_seconds()) > 10:
-        print("This website is vulnerable to time based SQL injection")
+        print("Request Failed, please check your url and try again.")
+    elif response.elapsed.total_seconds() > 10:
+        print("This website is vulnerable to time based SQL injection.")
     else:
-        print("This website is not vulnerable to time based SQL injection")
+        print("This website is not vulnerable to time based SQL injection.")
 
 
 def main():
