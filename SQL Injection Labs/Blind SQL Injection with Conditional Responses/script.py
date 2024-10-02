@@ -35,21 +35,18 @@ def enumerate_password(url, password_length):
 
 
 def main():
-    try:
-        url = sys.argv[1]
-        print("Enumerating Password Length...")
-        password_length = enumerate_password_length(url)
-        print(f"Password Length: {password_length} characters ")
-        enumerate_password(url, password_length)
-        print()
+    if len(sys.argv) != 2:
+        print(f"Usage: python3 {sys.argv[0]} <url>")
+        print("Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        sys.exit(1)
 
-    except IndexError:
-            print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://0aa000b30398e74d82a6069b002d00f8.web-security-academy.net")
+    url = sys.argv[1]
+    print("Enumerating Password Length...")
+    password_length = enumerate_password_length(url)
+    print(f"Password Length: {password_length} characters ")
+    enumerate_password(url, password_length)
+    print()
 
 
 if __name__ == "__main__":
     main()
-
-
-
-

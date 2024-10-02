@@ -27,14 +27,17 @@ def get_db_version(lab_url, num_of_columns):
 
 
 def main():
-    try:
-        lab_url = sys.argv[1].rstrip('/')
-        num_of_columns = get_num_of_columns(lab_url)
-        database_version = get_db_version(lab_url, num_of_columns)
-        print(f"Database version: {database_version}")
+    if len(sys.argv) != 2:
+        print(f"Usage: python3 {sys.argv[0]} <url>")
+        print("Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        sys.exit(1)
 
-    except IndexError:
-        print(f"Usage: python3 {sys.argv[0]} <url> \nExample: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+    lab_url = sys.argv[1].rstrip('/')
+    num_of_columns = get_num_of_columns(lab_url)
+    database_version = get_db_version(lab_url, num_of_columns)
+    print(f"Database version: {database_version}")
+
+
 
 
 if __name__ == "__main__":
