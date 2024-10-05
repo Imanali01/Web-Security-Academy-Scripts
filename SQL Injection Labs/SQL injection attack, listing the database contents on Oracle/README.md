@@ -10,4 +10,4 @@ To solve the lab, log in as the `administrator` user.
 To solve this lab using the script:
 1. Access lab here: `https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle`
 2. Run `python3 script.py <your lab url>`
-   This script will enumerate and display the password for the administrator user.
+   This script will enumerate the name of the table containing usernames and passwords, identify the relevant columns, retrieve and display the administrator user's password.
