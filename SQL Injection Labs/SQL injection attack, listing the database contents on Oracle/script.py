@@ -38,7 +38,7 @@ def get_admin_password(url, users_table, username_column, password_column):
 def main():
     if len(sys.argv) != 2:
         print(f"Usage: python3 {sys.argv[0]} <url>")
-        print("Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1].rstrip("/")

