@@ -14,6 +14,7 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Blind SQL injection with conditional errors](./SQL%20Injection%20Labs/Blind%20SQL%20injection%20with%20conditional%20errors)
   - [Visible error-based SQL injection](./SQL%20Injection%20Labs%2FVisible%20error-based%20SQL%20injection)
   - [Blind SQL injection with time delays](./SQL%20Injection%20Labs/Blind%20SQL%20injection%20with%20time%20delays)
+  - [Blind SQL injection with time delays and information retrieval](./SQL%20Injection%20Labs/Blind%20SQLi%20with%20time%20delays%20and%20informational%20retrieval)
 </details>
 
 <details>
