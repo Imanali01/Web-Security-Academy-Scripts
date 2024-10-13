@@ -36,3 +36,11 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Exploiting XXE via image file upload](./XXE%20Injection/Exploiting%20XXE%20via%20image%20file%20upload)
 
 </details>
+
+
+<details>
+  <summary>SSRF</summary>
+
+  - [Basic SSRF against the local server](./SSRF/Basic%20SSRF%20against%20the%20local%20server)
+
+</details>
