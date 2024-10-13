@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 
 def main():
     if len(sys.argv) != 2:
-        print(f"Usage: python3 {sys.argv[0]} <url>")
-        print(f"Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
+        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
     url = sys.argv[1].rstrip('/')
@@ -16,7 +16,7 @@ def main():
     # Extracting password from response
     soup = BeautifulSoup(response.text, 'html.parser')
     password = soup.find('p', class_='is-warning').text.split('"')[1]
-    print(f"Administrator account password: {password}")
+    print(f"(+) Administrator account password: {password}")
 
 
 if __name__ == "__main__":
