@@ -17,7 +17,6 @@ def delete_carlos_user(url):
 
     except requests.exceptions.RequestException as e:
         print(f"(-) An error has occurred: {e}")
-        sys.exit(1)
 
 
 def main():
