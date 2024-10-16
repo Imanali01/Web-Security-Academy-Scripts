@@ -44,5 +44,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Basic SSRF against the local server](./SSRF/Basic%20SSRF%20against%20the%20local%20server)
   - [Basic SSRF against another back-end system](./SSRF/Basic%20SSRF%20against%20another%20back-end%20system)
   - [SSRF with blacklist-based input filter](./SSRF/SSRF%20with%20blacklist-based%20input%20filter)
+  - [SSRF with filter bypass via open redirection vulnerability](./SSRF/SSRF%20with%20filter%20bypass%20via%20open%20redirection)
 
 </details>
