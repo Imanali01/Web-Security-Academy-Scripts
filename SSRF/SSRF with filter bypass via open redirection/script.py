@@ -1,6 +1,6 @@
 import requests
 import sys
-
+from requests.adapters import HTTPAdapter, Retry
 
 
 def delete_carlos_user(url):
@@ -33,8 +33,11 @@ def main():
 
 
     url = sys.argv[1].rstrip("/")
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
     print("(+) Deleting the user \"carlos\"...")
-    if delete_carlos_user(url):
+    if delete_carlos_user(url, session):
         print("(+) Successfully deleted the user \"carlos\"!")
     else:
         print("(-) The user \"carlos\" was not successfully deleted. Please check your URL and try again.")

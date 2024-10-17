@@ -6,10 +6,8 @@ from urllib3.util.retry import Retry
 
 
 
-def get_admin_password(url):
+def get_admin_password(url, session):
     try:
-        session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
         alphanumeric_characters = string.ascii_lowercase + string.digits
         password = ""
         print(f"(+) Enumerating password...")
@@ -43,8 +41,11 @@ def main():
         print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
+
     url = sys.argv[1].rstrip("/")
-    get_admin_password(url)
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+    get_admin_password(url, session)
     print()
 
 

