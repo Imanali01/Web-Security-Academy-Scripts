@@ -1,8 +1,7 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter, Retry
 
 
 
@@ -55,9 +54,14 @@ def main():
     session = requests.Session()
     session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
 
+
+    print("(+) Retrieving database version information...")
     num_of_columns = get_num_of_columns(lab_url, session)
-    database_version = get_db_version(lab_url, session, num_of_columns)
-    print(f"(+) Database version: {database_version}")
+    db_version = get_db_version(lab_url, session, num_of_columns)
+    if db_version:
+        print(f"(+) Database Version Information: {db_version}")
+    else:
+        print("(-) Unable to retrieve database version information.")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,10 @@ def find_admin_interface(url, session):
         print("(-) Request timed out. Please check your URL and try again.")
         sys.exit(1)
 
+    except requests.exceptions.MissingSchema:
+        print(f"Please enter a valid URL.")
+        sys.exit(1)
+
     except requests.exceptions.RequestException as e:
         print(f"(-) An error has occurred with your request: {e}")
         sys.exit(1)

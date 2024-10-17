@@ -53,16 +53,22 @@ def get_db_version(lab_url, session, num_of_columns):
 
 def main():
     if len(sys.argv) != 2:
-        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Usage: python3 {sys.argv[0]} <URL>")
         print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
-    lab_url = sys.argv[1].rstrip('/')
+
+    lab_url = sys.argv[1].rstrip("/")
     session = requests.Session()
     session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
 
+    print("(+) Retrieving database version information...")
     num_of_columns = determine_columns(lab_url, session)
-    print(f"(+) Database Version Information: {get_db_version(lab_url, session, num_of_columns)}")
+    db_version = get_db_version(lab_url, session, num_of_columns)
+    if db_version:
+        print(f"(+) Database Version Information: {db_version}")
+    else:
+        print("(-) Unable to retrieve database version information.")
 
 
 if __name__ == "__main__":

