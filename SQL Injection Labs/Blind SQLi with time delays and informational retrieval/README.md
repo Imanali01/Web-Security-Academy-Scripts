@@ -7,6 +7,6 @@ To solve the lab, log in as the `administrator` user.
 
 ### Instructions
 To solve this lab using the script:
-1. Access lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval`
-2. Run `python3 script.py <your lab url>`
+1. Access lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval`.
+2. Run `python3 script.py <your lab URL>`.
    This script will successfully exploit the application's time based SQL injection vulnerability retrieve the `administrator` user's password.

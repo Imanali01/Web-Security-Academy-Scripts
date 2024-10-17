@@ -6,5 +6,5 @@ You can log in to your own account using the following credentials: `wiener:pete
 
 ### Instructions
 To solve this lab using the script:
-1. Access the lab here: `https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass`
-2. Run `python3 script.py <your lab url>` The script will display the contents of the `/home/carlos/secret` file.
+1. Access the lab here: `https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass`.
+2. Run `python3 script.py <your lab URL>` The script will display the contents of the `/home/carlos/secret` file.

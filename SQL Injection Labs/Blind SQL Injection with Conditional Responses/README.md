@@ -5,6 +5,6 @@ To solve the lab, log in as the administrator user.
 
 ### Instructions
 To solve this lab using the script:
-1. Access lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses`
-2. Run `python3 script.py <your lab url>`
+1. Access the lab here: `https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses`.
+2. Run `python3 script.py <your lab URL>`.
    This script will enumerate and display the password for the administrator user.

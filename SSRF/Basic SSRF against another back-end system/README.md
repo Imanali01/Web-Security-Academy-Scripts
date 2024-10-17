@@ -5,5 +5,5 @@ To solve the lab, use the stock check functionality to scan the internal `192.16
 
 ### Instructions
 To solve this lab using the script:
-1. Access the lab here: `https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system`
-2. Run `python3 script.py <your lab URL>` The script will solve the lab and delete the user `carlos`.
+1. Access the lab here: `https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system`.
+2. Run `python3 script.py <your lab URL>`. The script will solve the lab and delete the user `carlos`.

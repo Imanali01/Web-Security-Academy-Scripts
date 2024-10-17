@@ -8,6 +8,6 @@ To solve the lab, log in as the `administrator` user.
 
 ### Instructions
 To solve this lab using the script:
-1. Access lab here: `https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle`
-2. Run `python3 script.py <your lab url>`
+1. Access the lab here: `https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle`.
+2. Run `python3 script.py <your lab URL>`.
    The script will enumerate and display the name of the users table, the username and password column names, and the `administrator` user's password.

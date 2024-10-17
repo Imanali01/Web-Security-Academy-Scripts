@@ -6,5 +6,5 @@ The developer has deployed two weak anti-SSRF defenses that you will need to byp
 
 ### Instructions
 To solve this lab using the script:
-1. Access the lab here: `https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter`
+1. Access the lab here: `https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter`.
 2. Run `python3 script.py <your lab URL>`. The script will solve the lab and delete the user `carlos`.
