@@ -29,8 +29,6 @@ def get_num_of_columns(lab_url, session):
 
 
 def get_db_version(lab_url, session, num_of_columns):
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
     for i in range(num_of_columns):
         payload = ["NULL"] * num_of_columns
         payload[i] = "@@version"
@@ -39,7 +37,7 @@ def get_db_version(lab_url, session, num_of_columns):
         response = session.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
-            version_string = soup.find('tbody').get_text().strip()
+            version_string = soup.find("tbody").get_text().strip()
             return version_string
 
 

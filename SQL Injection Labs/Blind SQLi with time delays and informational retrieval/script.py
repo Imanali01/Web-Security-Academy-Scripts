@@ -1,8 +1,7 @@
 import sys
 import requests
 import string
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter, Retry
 
 
 
