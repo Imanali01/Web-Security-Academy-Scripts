@@ -51,10 +51,10 @@ def main():
     if admin_interface_url:
         print(f"(+) Admin interface found at: {admin_interface_url}")
     else:
-        print("(-) Admin interface URL not found.")
+        print("(-) Admin interface not found.")
         sys.exit(1)
 
-    print("(+) Deleting Carlos user...")
+    print("(+) Deleting the user \"carlos\"...")
     if delete_carlos_user(url, session, admin_interface_url):
         print("(+) Successfully deleted the user \"carlos\"!")
     else:

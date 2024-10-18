@@ -6,4 +6,4 @@ To solve the lab, change the stock check URL to access the admin interface at `h
 ### Instructions
 To solve this lab using the script:
 1. Access the lab here: `https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-localhost`.
-2. Run `python3 script.py <your lab url>`. The script will solve the lab and delete the user `carlos`.
+2. Run `python3 script.py <your lab URL>`. The script will solve the lab and delete the user `carlos`.
