@@ -1,12 +1,6 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-
-
-
-import requests
-import sys
-from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter, Retry
 
 
@@ -39,7 +33,7 @@ def upload_file(url, session):
 
     data = {
         "user": "wiener",
-        "csrf": csrf_token,
+        "csrf": csrf_token
     }
 
     upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data)
