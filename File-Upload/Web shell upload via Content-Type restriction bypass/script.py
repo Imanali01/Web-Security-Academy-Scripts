@@ -62,6 +62,7 @@ def main():
         print("(+) Logging in...")
         if not login(url, session):
             print("(-) Something went wrong. Check your URL and try again.")
+            sys.exit(1)
 
         print("(+) Uploading webshell.php")
         if upload_file(url, session):

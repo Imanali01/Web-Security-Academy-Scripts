@@ -27,7 +27,7 @@ def login(url, session):
 
 
 def upload_file(url, session):
-    response = session.get(f"{url}/my-account")
+    response = session.get(f"{url}/my-account", timeout=10)
     csrf_token = extract_csrf_token(response)
 
     file = {
@@ -39,7 +39,7 @@ def upload_file(url, session):
         "csrf": csrf_token
     }
 
-    upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data)
+    upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data, timeout=10)
     return upload_response.status_code == 200
 
 

