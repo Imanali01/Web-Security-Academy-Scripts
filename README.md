@@ -48,3 +48,11 @@ This repository contains Python scripts I developed to solve various labs from P
   - [SSRF with whitelist-based input filter](./SSRF/SSRF%20with%20whitelist-based%20input%20filter)
 
 </details>
+
+
+<details>
+  <summary>Command Injection</summary>
+
+  - [OS command injection, simple case](./Command%20Injection/OS%20command%20injection,%20simple%20case)
+
+</details>
