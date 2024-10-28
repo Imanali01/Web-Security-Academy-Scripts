@@ -55,5 +55,6 @@ This repository contains Python scripts I developed to solve various labs from P
 
   - [OS command injection, simple case](./Command%20Injection/OS%20command%20injection,%20simple%20case)
   - [Blind OS command injection with time delays](./Command%20Injection/Blind%20OS%20command%20injection%20with%20time%20delays)
+  - [Blind OS command injection with output redirection](./Command%20Injection/Blind%20OS%20command%20injection%20with%20output%20redirection)
 
 </details>
