@@ -7,9 +7,10 @@ from requests.adapters import HTTPAdapter, Retry
 
 def get_csrf_token(url, session):
     response = session.get(f"{url}/feedback", timeout=10)
-    soup = BeautifulSoup(response.text, "html.parser")
-    csrf_token = soup.find("input", {"name": "csrf"})["value"]
-    return csrf_token
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, "html.parser")
+        csrf_token = soup.find("input", {"name": "csrf"})["value"]
+        return csrf_token
 
 
 def execute_command(url, session):
