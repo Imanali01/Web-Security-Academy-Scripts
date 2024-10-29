@@ -66,5 +66,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [File path traversal, traversal sequences blocked with absolute path bypass](./Path%20Traversal/File%20path%20traversal,%20traversal%20sequences%20blocked%20with%20absolute%20path%20bypass)
   - [File path traversal, traversal sequences stripped non-recursively](./Path%20Traversal/File%20path%20traversal,%20traversal%20sequences%20stripped%20non-recursively)
   - [File path traversal, traversal sequences stripped with superfluous URL-decode](./Path%20Traversal/File%20path%20traversal,%20traversal%20sequences%20stripped%20with%20superfluous%20URL-decode)
+  - [File path traversal, validation of start of path](./Path%20Traversal/File%20path%20traversal,%20validation%20of%20start%20of%20path)
 
 </details>
