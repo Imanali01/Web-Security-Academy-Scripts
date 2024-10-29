@@ -63,5 +63,5 @@ This repository contains Python scripts I developed to solve various labs from P
   <summary>Path Traversal</summary>
 
   - [File path traversal, simple case](./Path%20Traversal/File%20path%20traversal,%20simple%20case)
-
+  - [File path traversal, traversal sequences blocked with absolute path bypass](./Path%20Traversal/File%20path%20traversal,%20traversal%20sequences%20blocked%20with%20absolute%20path%20bypass)
 </details>
