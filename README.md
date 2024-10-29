@@ -58,3 +58,10 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Blind OS command injection with output redirection](./Command%20Injection/Blind%20OS%20command%20injection%20with%20output%20redirection)
 
 </details>
+
+<details>
+  <summary>Path Traversal</summary>
+
+  - [File path traversal, simple case](./Path%20Traversal/File%20path%20traversal,%20simple%20case)
+
+</details>
