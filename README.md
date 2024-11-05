@@ -78,6 +78,7 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Web cache poisoning with an unkeyed cookie](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20with%20an%20unkeyed%20cookie)
   - [Web cache poisoning with multiple headers](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20with%20multiple%20headers)
   - [Targeted web cache poisoning using an unknown header](./Web%20Cache%20Poisoning/Targeted%20web%20cache%20poisoning%20using%20an%20unknown%20header)
+  - [Web cache poisoning via an unkeyed query string](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20via%20an%20unkeyed%20query%20string)
 
 
 </details>
