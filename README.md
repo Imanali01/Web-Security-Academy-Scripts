@@ -1,5 +1,5 @@
 # Web Security Academy Scripts
-This repository contains Python scripts I developed to solve various labs from PortSwigger's Web Security Academy. These scripts automate the process of exploiting web security vulnerabilities found in the academy's labs. 
+This repository contains Python scripts I developed to solve various labs from PortSwigger's Web Security Academy. These scripts automate the process of exploiting the vulnerabilities found in the academy's labs. 
 
 ## Table of Contents
 <details>
@@ -81,6 +81,7 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Web cache poisoning via an unkeyed query string](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20via%20an%20unkeyed%20query%20string)
   - [Web cache poisoning via an unkeyed query parameter](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20via%20an%20unkeyed%20query%20parameter)
   - [Parameter cloaking](./Web%20Cache%20Poisoning/Parameter%20cloaking)
+  - [Web cache poisoning via a fat GET request](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20via%20a%20fat%20GET%20request)
 
 
 </details>
