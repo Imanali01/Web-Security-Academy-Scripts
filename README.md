@@ -91,4 +91,6 @@ This repository contains Python scripts I developed to solve various labs from P
 
 - [Excessive trust in client-side controls](./Business%20Logic%20Vulnerabilities/Excessive%20trust%20in%20client-side%20controls)
 - [High-level logic vulnerability](./Business%20Logic%20Vulnerabilities/High-level%20logic%20vulnerability)
+- [Inconsistent security controls](./Business%20Logic%20Vulnerabilities/Inconsistent%20security%20controls)
+
 </details>
