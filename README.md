@@ -96,5 +96,6 @@ This repository contains Python scripts I developed to solve various labs from P
 - [Inconsistent handling of exceptional input](./Business%20Logic%20Vulnerabilities/Inconsistent%20handling%20of%20exceptional%20input)
 - [Weak isolation on dual-use endpoint](./Business%20Logic%20Vulnerabilities/Weak%20isolation%20on%20dual-use%20endpoint)
 - [Insufficient workflow validation](./Business%20Logic%20Vulnerabilities/Insufficient%20workflow%20validation)
+- [Authentication bypass via flawed state machine](./Business%20Logic%20Vulnerabilities/Authentication%20bypass%20via%20flawed%20state%20machine)
 
 </details>
