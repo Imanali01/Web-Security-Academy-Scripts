@@ -94,5 +94,6 @@ This repository contains Python scripts I developed to solve various labs from P
 - [Inconsistent security controls](./Business%20Logic%20Vulnerabilities/Inconsistent%20security%20controls)
 - [Flawed enforcement of business rules](./Business%20Logic%20Vulnerabilities/Flawed%20enforcement%20of%20business%20rules)
 - [Inconsistent handling of exceptional input](./Business%20Logic%20Vulnerabilities/Inconsistent%20handling%20of%20exceptional%20input)
+- [Weak isolation on dual-use endpoint](./Business%20Logic%20Vulnerabilities/Weak%20isolation%20on%20dual-use%20endpoint)
 
 </details>
