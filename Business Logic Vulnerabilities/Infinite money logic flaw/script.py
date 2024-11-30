@@ -28,10 +28,10 @@ def login(url, session):
 def get_gift_cards(url, session):
     gift_cards_purchased = 0
 
-    # Adding item to the cart in order to extract csrf token from the /cart page. There has to be an item in the cart for the /cart page to contain a csrf token
+    # Adding an item to the cart to ensure the /cart page contains a CSRF token
     session.post(f"{url}/cart", data={"productId": "2", "redir": "PRODUCT", "quantity": "1"}, allow_redirects=False, timeout=10)
 
-    # Extracting csrf token
+    # Requesting /cart page and extracting CSRF token
     response = session.get(f"{url}/cart")
     csrf_token = extract_csrf_token(response)
 
@@ -112,7 +112,7 @@ def main():
         print("(-) Unable to connect to host. Please check your URL and try again.")
 
     except KeyboardInterrupt:
-        sys.exit()
+        sys.exit(1)
 
 
 if __name__ == "__main__":
