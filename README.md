@@ -105,5 +105,6 @@ This repository contains Python scripts I developed to solve various labs from P
 <summary>HTTP Host header attacks</summary>
 
 - [Basic password reset poisoning](./HTTP%20Host%20header%20attacks/Basic%20password%20reset%20poisoning)
+- [Host header authentication bypass](./HTTP%20Host%20header%20attacks/Host%20header%20authentication%20bypass)
 
 </details>
