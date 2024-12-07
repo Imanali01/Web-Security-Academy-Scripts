@@ -111,5 +111,6 @@ This repository contains Python scripts I developed to solve various labs from P
   <summary>Access Control Vulnerabilities</summary>
 
   - [Unprotected admin functionality](./Access%20Control%20Vulnerabilities/Unprotected%20admin%20functionality)
+  - [Unprotected admin functionality with unpredictable URL](./Access%20Control%20Vulnerabilities/Unprotected%20admin%20functionality%20with%20unpredictable%20URL)
 
 </details>
