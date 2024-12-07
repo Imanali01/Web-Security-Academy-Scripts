@@ -18,16 +18,6 @@ This repository contains Python scripts I developed to solve various labs from P
 </details>
 
 <details>
-  <summary>File Upload</summary>
-
-  - [Remote code execution via web shell upload](./File-Upload/Remote%20code%20execution%20via%20web%20shell%20upload)
-  - [Web shell upload via Content-Type restriction bypass](./File-Upload%2FWeb%20shell%20upload%20via%20Content-Type%20restriction%20bypass)
-  - [Web shell upload via path traversal](./File-Upload/Web%20shell%20upload%20via%20path%20traversal)
-  - [Web shell upload via extension blacklist bypass](./File-Upload%2FWeb%20shell%20upload%20via%20extension%20blacklist%20bypass)
-  - [Web shell upload via obfuscated file extension](./File-Upload/Web%20shell%20upload%20via%20obfuscated%20file%20extension)
-</details>
-
-<details>
   <summary>XXE Injection</summary>
 
   - [Exploiting XXE using external entities to retrieve files](./XXE%20Injection%2FExploiting%20XXE%20using%20external%20entities%20to%20retrieve%20files)
@@ -36,7 +26,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Exploiting XXE via image file upload](./XXE%20Injection/Exploiting%20XXE%20via%20image%20file%20upload)
 
 </details>
-
 
 <details>
   <summary>SSRF</summary>
@@ -48,7 +37,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [SSRF with whitelist-based input filter](./SSRF/SSRF%20with%20whitelist-based%20input%20filter)
 
 </details>
-
 
 <details>
   <summary>Command Injection</summary>
@@ -83,7 +71,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Parameter cloaking](./Web%20Cache%20Poisoning/Parameter%20cloaking)
   - [Web cache poisoning via a fat GET request](./Web%20Cache%20Poisoning/Web%20cache%20poisoning%20via%20a%20fat%20GET%20request)
 
-
 </details>
 
 <details>
@@ -106,5 +93,23 @@ This repository contains Python scripts I developed to solve various labs from P
 
 - [Basic password reset poisoning](./HTTP%20Host%20header%20attacks/Basic%20password%20reset%20poisoning)
 - [Host header authentication bypass](./HTTP%20Host%20header%20attacks/Host%20header%20authentication%20bypass)
+
+</details>
+
+
+<details>
+  <summary>File Upload</summary>
+
+  - [Remote code execution via web shell upload](./File-Upload/Remote%20code%20execution%20via%20web%20shell%20upload)
+  - [Web shell upload via Content-Type restriction bypass](./File-Upload%2FWeb%20shell%20upload%20via%20Content-Type%20restriction%20bypass)
+  - [Web shell upload via path traversal](./File-Upload/Web%20shell%20upload%20via%20path%20traversal)
+  - [Web shell upload via extension blacklist bypass](./File-Upload%2FWeb%20shell%20upload%20via%20extension%20blacklist%20bypass)
+  - [Web shell upload via obfuscated file extension](./File-Upload/Web%20shell%20upload%20via%20obfuscated%20file%20extension)
+</details>
+
+<details>
+  <summary>Access Control Vulnerabilities</summary>
+
+  - [Unprotected admin functionality](./Access%20Control%20Vulnerabilities/Unprotected%20admin%20functionality)
 
 </details>
