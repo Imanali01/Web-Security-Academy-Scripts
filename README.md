@@ -112,5 +112,6 @@ This repository contains Python scripts I developed to solve various labs from P
 
   - [Unprotected admin functionality](./Access%20Control%20Vulnerabilities/Unprotected%20admin%20functionality)
   - [Unprotected admin functionality with unpredictable URL](./Access%20Control%20Vulnerabilities/Unprotected%20admin%20functionality%20with%20unpredictable%20URL)
+  - [User role controlled by request parameter](./Access%20Control%20Vulnerabilities/User%20role%20controlled%20by%20request%20parameter)
 
 </details>
