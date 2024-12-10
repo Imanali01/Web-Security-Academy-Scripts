@@ -116,5 +116,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [User role can be modified in user profile](./Access%20Control%20Vulnerabilities/User%20role%20can%20be%20modified%20in%20user%20profile)
   - [User ID controlled by request parameter](./Access%20Control%20Vulnerabilities/User%20ID%20controlled%20by%20request%20parameter)
   - [User ID controlled by request parameter, with unpredictable user IDs](./Access%20Control%20Vulnerabilities/User%20ID%20controlled%20by%20request%20parameter,%20with%20unpredictable%20user%20IDs)
+  - [User ID controlled by request parameter with data leakage in redirect](./Access%20Control%20Vulnerabilities/User%20ID%20controlled%20by%20request%20parameter%20with%20data%20leakage%20in%20redirect)
 
 </details>
