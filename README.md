@@ -122,5 +122,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [URL-based access control can be circumvented](./Access%20Control%20Vulnerabilities/URL-based%20access%20control%20can%20be%20circumvented)
   - [Method-based access control can be circumvented](./Access%20Control%20Vulnerabilities/Method-based%20access%20control%20can%20be%20circumvented)
   - [Multi-step process with no access control on one step](./Access%20Control%20Vulnerabilities/Multi-step%20process%20with%20no%20access%20control%20on%20one%20step)
+  - [Referer-based access control](./Access%20Control%20Vulnerabilities/Referer-based%20access%20control)
 
 </details>
