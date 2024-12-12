@@ -119,5 +119,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [User ID controlled by request parameter with data leakage in redirect](./Access%20Control%20Vulnerabilities/User%20ID%20controlled%20by%20request%20parameter%20with%20data%20leakage%20in%20redirect)
   - [User ID controlled by request parameter with password disclosure](./Access%20Control%20Vulnerabilities/User%20ID%20controlled%20by%20request%20parameter%20with%20password%20disclosure)
   - [Insecure direct object references](./Access%20Control%20Vulnerabilities/Insecure%20direct%20object%20references)
+  - [URL-based access control can be circumvented](./Access%20Control%20Vulnerabilities/URL-based%20access%20control%20can%20be%20circumvented)
 
 </details>
