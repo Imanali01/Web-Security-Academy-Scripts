@@ -1,4 +1,4 @@
-## Insecure direct object referencesUnprotected admin functionality
+## Insecure direct object references
 ### Lab Scenario
 This lab stores user chat logs directly on the server's file system, and retrieves them using static URLs.
 Solve the lab by finding the password for the user `carlos`, and logging into their account.
