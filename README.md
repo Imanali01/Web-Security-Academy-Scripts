@@ -129,5 +129,5 @@ This repository contains Python scripts I developed to solve various labs from P
 <details>
   <summary>Authentication Vulnerabilities</summary>
 
-  - [Username enumeration via different responses](./Authentication/Username%20enumeration%20via%20different%20responses)
+  - [Username enumeration via different responses](./Authentication%20Vulnerabilities/Username%20enumeration%20via%20different%20responses)
 </details>
