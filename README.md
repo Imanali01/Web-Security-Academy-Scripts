@@ -125,3 +125,9 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Referer-based access control](./Access%20Control%20Vulnerabilities/Referer-based%20access%20control)
 
 </details>
+
+<details>
+  <summary>Authentication Vulnerabilities</summary>
+
+  - [Username enumeration via different responses](./Authentication/Username%20enumeration%20via%20different%20responses)
+</details>
