@@ -25,14 +25,12 @@ def main():
         session = requests.Session()
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
-        print("(+) Resetting the user carlos's password...")
-        if reset_password(url, session):
-            print("(+) Password successfully reset!")
-        else:
+        print("(+) Resetting Carlos's password...")
+        if not reset_password(url, session):
             print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
 
-        print("(+) Logging in as carlos...")
+        print("(+) Logging in as Carlos...")
         if login(url, session):
             print("(+) Successfully solved the lab!")
         else:
