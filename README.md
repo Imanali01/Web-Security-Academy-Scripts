@@ -130,4 +130,6 @@ This repository contains Python scripts I developed to solve various labs from P
   <summary>Authentication Vulnerabilities</summary>
 
   - [Username enumeration via different responses](./Authentication%20Vulnerabilities/Username%20enumeration%20via%20different%20responses)
+  - [2FA simple bypass](./Authentication%20Vulnerabilities/2FA%20simple%20bypass)
+
 </details>
