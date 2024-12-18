@@ -4,10 +4,7 @@ import sys
 
 
 def delete_user(url, session):
-    # Deleting the user "carlos"
     response = session.get(f"{url}/administrator-panel/delete?username=carlos", timeout=10)
-
-    # Verifying user has been deleted
     return "User deleted successfully!" in response.text
 
 
@@ -39,7 +36,7 @@ def main():
         print("(-) Unable to connect to host. Please check your URL and try again.")
 
     except KeyboardInterrupt:
-        exit(1)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

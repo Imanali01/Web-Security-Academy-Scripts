@@ -1,6 +1,5 @@
 import sys
 import requests
-from requests.adapters import HTTPAdapter, Retry
 
 
 
@@ -30,7 +29,7 @@ def main():
     try:
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Finding admin interface...")
         admin_interface_url = find_admin_interface(url, session)
@@ -46,6 +45,7 @@ def main():
         else:
             print("(-) The user \"carlos\" was not successfully deleted.")
 
+
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
 
@@ -54,6 +54,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

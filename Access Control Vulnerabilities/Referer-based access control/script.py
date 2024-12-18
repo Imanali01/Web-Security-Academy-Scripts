@@ -47,7 +47,7 @@ def main():
         print("(-) Unable to connect to host. Please check your URL and try again.")
 
     except KeyboardInterrupt:
-        exit(1)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

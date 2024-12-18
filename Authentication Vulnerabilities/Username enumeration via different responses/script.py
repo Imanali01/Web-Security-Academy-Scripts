@@ -76,6 +76,9 @@ def main():
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
 
+    except KeyboardInterrupt:
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

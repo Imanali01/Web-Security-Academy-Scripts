@@ -1,7 +1,6 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter, Retry
 
 
 def extract_csrf_token(response):
@@ -60,7 +59,7 @@ def main():
     try:
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Logging in...")
         if not login(url, session):
@@ -83,6 +82,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

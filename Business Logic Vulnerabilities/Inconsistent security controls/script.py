@@ -70,7 +70,7 @@ def main():
         print("(+) Logging in...")
         login(url, session)
 
-        print("(+) Exploiting Business Logic vulnerability and deleting the user \"carlos\"...")
+        print("(+) Deleting the user \"carlos\"...")
         if exploit_vuln(url, session):
             print("(+) Lab completed successfully!")
         else:
@@ -85,6 +85,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

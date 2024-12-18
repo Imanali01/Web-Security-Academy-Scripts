@@ -1,7 +1,6 @@
 import sys
 import requests
 import string
-from requests.adapters import HTTPAdapter, Retry
 
 
 def enumerate_password_length(url, session):
@@ -41,7 +40,7 @@ def main():
     try:
         url = sys.argv[1]
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Enumerating Password Length...")
         password_length = enumerate_password_length(url, session)
@@ -61,6 +60,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

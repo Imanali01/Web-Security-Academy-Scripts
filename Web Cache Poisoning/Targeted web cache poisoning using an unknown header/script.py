@@ -58,6 +58,7 @@ def main():
         else:
             print("(-) Something went wrong. Please try again.")
 
+
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
 
@@ -65,7 +66,10 @@ def main():
         print("(-) Please enter a valid URL.")
 
     except requests.exceptions.ConnectionError:
-        print("(-) Unable to connect to the host. Check your URL and try again.")
+        print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

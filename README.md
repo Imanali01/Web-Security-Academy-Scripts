@@ -28,7 +28,7 @@ This repository contains Python scripts I developed to solve various labs from P
 </details>
 
 <details>
-  <summary>SSRF</summary>
+  <summary>Server-Side Request Forgery (SSRF)</summary>
 
   - [Basic SSRF against the local server](./SSRF/Basic%20SSRF%20against%20the%20local%20server)
   - [Basic SSRF against another back-end system](./SSRF/Basic%20SSRF%20against%20another%20back-end%20system)

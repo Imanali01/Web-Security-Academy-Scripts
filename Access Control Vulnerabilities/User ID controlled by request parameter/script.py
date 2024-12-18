@@ -45,10 +45,10 @@ def main():
             print("(-) Something went wrong. Please check your URL and try again.")
             sys.exit(1)
 
-        print("(+) Getting carlos's api key....")
+        print("(+) Getting Carlos's API key....")
         api_key = get_api_key(url, session)
         if api_key:
-            print(f"(+) Successfully retrieved carlos's api key! His API Key is: {api_key}")
+            print(f"(+) Successfully retrieved Carlos's API key! His API Key is: {api_key}")
         else:
             print("(-) Something went wrong. Please try again.")
             sys.exit(1)

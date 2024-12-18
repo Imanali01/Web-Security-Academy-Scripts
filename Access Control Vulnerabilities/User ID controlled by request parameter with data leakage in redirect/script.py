@@ -27,7 +27,7 @@ def main():
         session = requests.Session()
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=requests.adapters.Retry(total=3, backoff_factor=0.1)))
 
-        print("(+) Getting user carlos's API key...")
+        print("(+) Getting Carlos's API key...")
         api_key = get_api_keys(url, session)
         if api_key:
             print(f"(+) API key found! API key is: {api_key}")
