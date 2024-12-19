@@ -134,5 +134,6 @@ This repository contains Python scripts I developed to solve various labs from P
   - [Password reset broken logic](./Authentication%20Vulnerabilities/Password%20reset%20broken%20logic)
   - [Username enumeration via response timing](./Authentication%20Vulnerabilities/Username%20enumeration%20via%20subtly%20different%20responses)
   - [Broken brute-force protection, IP block](./Authentication%20Vulnerabilities/Broken%20brute-force%20protection,%20IP%20block)
+  - [Username enumeration via account lock](./Authentication%20Vulnerabilities/Username%20enumeration%20via%20account%20lock)
 
 </details>
